@@ -1,4 +1,3 @@
-
 package Vistas;
 
 import Entidades.Materia;
@@ -7,24 +6,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
-    private void limpiarCampos() {
+   
+
+public class FormularioMateria1 extends javax.swing.JInternalFrame {
+
+    private materiaData matData = new materiaData();
+    private Materia matActual = null; 
+
+    
+    public FormularioMateria1() {
+        initComponents();
+    }
+
+private void limpiarCampos() {
         jtfCodigo.setText("");
         jtfNombre.setText("");
         jtfAño.setText("");
         jcbEstado.setSelected(false);
-    }
-/**
- *
- * @author User
- */
-public class FormularioMateria1 extends javax.swing.JInternalFrame {
-
-  private materiaData matData = new materiaData();
-    private Materia matActual = null;
-    
-    
-    public FormularioMateria1() {
-        initComponents();
     }
 
 
@@ -34,11 +32,7 @@ public class FormularioMateria1 extends javax.swing.JInternalFrame {
         return match.matches();
     }
     
-    private boolean validarTexto(String text){
-        Pattern patron = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]+$");
-        Matcher match = patron.matcher(text);
-        return match.matches();
-    }
+
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -209,10 +203,8 @@ public class FormularioMateria1 extends javax.swing.JInternalFrame {
              }  
         }else{
             JOptionPane.showMessageDialog(this, "Debe ingresar un id valido");
-        }
-        
-
-    }   
+        }       
+     
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
@@ -257,9 +249,10 @@ public class FormularioMateria1 extends javax.swing.JInternalFrame {
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {                                        
          dispose();
     }//GEN-LAST:event_jbEliminarActionPerformed
+                                         
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-     
+dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
 
@@ -280,3 +273,4 @@ public class FormularioMateria1 extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfNombre;
     // End of variables declaration//GEN-END:variables
 }
+
