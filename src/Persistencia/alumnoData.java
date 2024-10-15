@@ -96,7 +96,7 @@ public class alumnoData {
     public Alumno buscarAlumnoPorDni(int dni){
         Alumno alumno = null;
         try{
-            String sql = "SELECT `idAlumno`, dni, `apellido`, `nombre`, `fechaNac` FROM `alumno` WHERE dni = ? AND estado = 1";
+            String sql = "SELECT `id_alumno`, dni, `apellido`, `nombre`, `fechaNacimiento` FROM `alumno` WHERE dni = ? AND estado = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setInt(1,dni);
@@ -105,11 +105,11 @@ public class alumnoData {
             
             if (rs.next()) {
                 alumno = new Alumno();
-                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setIdAlumno(rs.getInt("id_alumno"));
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
-                alumno.setFecha(rs.getDate("fechaNac").toLocalDate());
+                alumno.setFecha(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(true);
                 
             }else{
@@ -146,11 +146,11 @@ public class alumnoData {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Alumno alumno = new Alumno();
-                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setIdAlumno(rs.getInt("id_alumno"));
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
-                alumno.setFecha((rs.getDate("fechaNac").toLocalDate()));
+                alumno.setFecha((rs.getDate("fechaNacimiento").toLocalDate()));
                 alumno.setEstado(rs.getBoolean("estado"));
                 alumnos.add(alumno);
             }
