@@ -7,7 +7,6 @@ import Persistencia.alumnoData;
 import Persistencia.materiaData;
 import Vistas.Menu;
 import java.time.LocalDate;
-import java.util.List;
 
 public class Transversal_GP5 {
 
