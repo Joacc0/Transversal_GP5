@@ -20,7 +20,7 @@ public class inscripcionData {
     }
     
     public void guardarInscripcion(Inscripcion insc){
-        String sql = "INSERT INTO inscripcion(nota, idAlumno, idMateria) "
+        String sql = "INSERT INTO inscripcion(nota, id_alumno, id_materia) "
                 + "VALUES (?,?,?)";
         
         try {
@@ -41,7 +41,7 @@ public class inscripcionData {
     
     public void actualizarNota(int idAlumno,int idMateria,double nota){
         String sql = "UPDATE inscripcion SET nota = ?"
-                + "WHERE idMateria = ? AND idAlumno = ?";
+                + "WHERE id_materia = ? AND id_mlumno = ?";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -69,9 +69,9 @@ public class inscripcionData {
             while (rs.next()) {
                 Inscripcion insc = new Inscripcion();
                 
-                insc.setIdInscripcion(rs.getInt("idInscripcion"));
-                Alumno alum = alumData.buscarAlumno(rs.getInt("idAlumno"));
-                Materia mat = matData.buscarMateria(rs.getInt("idMateria"));
+                insc.setIdInscripcion(rs.getInt("id_inscripto"));
+                Alumno alum = alumData.buscarAlumno(rs.getInt("id_alumno"));
+                Materia mat = matData.buscarMateria(rs.getInt("id_materia"));
                 insc.setAlumno(alum);
                 insc.setMateria(mat);
                 insc.setNota(rs.getDouble("nota"));
@@ -86,7 +86,7 @@ public class inscripcionData {
     
     public List<Inscripcion> obtenerInscripcionesPorAlumno(int id){
         List<Inscripcion> inscripciones = new ArrayList<>();
-        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+        String sql = "SELECT * FROM inscripcion WHERE id_alumno = ?";
         alumnoData alumData = new alumnoData();
         materiaData matData = new materiaData();
         
@@ -96,9 +96,9 @@ public class inscripcionData {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Inscripcion insc = new Inscripcion();
-                insc.setIdInscripcion(rs.getInt("idInscripcion"));
+                insc.setIdInscripcion(rs.getInt("id_inscripto"));
                 Alumno alum = alumData.buscarAlumno(id);
-                Materia mat = matData.buscarMateria(rs.getInt("idMateria"));
+                Materia mat = matData.buscarMateria(rs.getInt("id_materia"));
                 insc.setAlumno(alum);
                 insc.setMateria(mat);
                 insc.setNota(rs.getInt("nota"));
@@ -114,17 +114,17 @@ public class inscripcionData {
         List<Materia> materias = new ArrayList<>();
         
         String sql = "SELECT materia.* FROM `materia` JOIN inscripcion "
-                + " ON materia.idMateria = inscripcion.idMateria "
-                + " WHERE inscripcion.idAlumno = ?";
+                + " ON materia.id_materia = inscripcion.id_materia "
+                + " WHERE inscripcion.id_alumno = ?";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idAlumno);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Materia mat = new Materia();
-                mat.setIdMateria(rs.getInt("idMateria"));
+                mat.setIdMateria(rs.getInt("id_materia"));
                 mat.setNombre(rs.getString("nombre"));
-                mat.setAnio(rs.getInt("año"));
+                mat.setAnio(rs.getInt("year"));
                 mat.setEstado(rs.getBoolean("estado"));
                 materias.add(mat);
             }   
@@ -138,18 +138,18 @@ public class inscripcionData {
         List<Materia> materias = new ArrayList<>();
         
         String sql = "SELECT materia.* FROM materia "
-               + "LEFT JOIN inscripcion ON materia.idMateria = inscripcion.idMateria "
-               + "AND inscripcion.idAlumno = ? "
-               + "WHERE inscripcion.idAlumno IS NULL";
+               + "LEFT JOIN inscripcion ON materia.id_materia = inscripcion.id_materia "
+               + "AND inscripcion.id_alumno = ? "
+               + "WHERE inscripcion.id_alumno IS NULL";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idAlumno);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Materia mat = new Materia();
-                mat.setIdMateria(rs.getInt("idMateria"));
+                mat.setIdMateria(rs.getInt("id_materia"));
                 mat.setNombre(rs.getString("nombre"));
-                mat.setAnio(rs.getInt("año"));
+                mat.setAnio(rs.getInt("year"));
                 mat.setEstado(rs.getBoolean("estado"));
                 materias.add(mat);
             }   
@@ -163,8 +163,8 @@ public class inscripcionData {
         List<Alumno> alumnos = new ArrayList<>();
         
         String sql = "SELECT alumno.* FROM `alumno` "
-                + "JOIN inscripcion ON alumno.idAlumno = inscripcion.idAlumno "
-                + "WHERE inscripcion.idMateria = ?;";
+                + "JOIN inscripcion ON alumno.id_alumno = inscripcion.id_alumno "
+                + "WHERE inscripcion.id_materia = ?;";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -172,11 +172,11 @@ public class inscripcionData {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Alumno alum = new Alumno();
-                alum.setIdAlumno(rs.getInt("idAlumno"));
+                alum.setIdAlumno(rs.getInt("id_alumno"));
                 alum.setDni(rs.getInt("dni"));
                 alum.setApellido(rs.getString("apellido"));
                 alum.setNombre(rs.getString("nombre"));
-                alum.setFecha(rs.getDate("fechaNac").toLocalDate());
+                alum.setFecha(rs.getDate("fechaNacimiento").toLocalDate());
                 alum.setEstado(rs.getBoolean("estado"));
                 alumnos.add(alum);
             }
@@ -188,7 +188,7 @@ public class inscripcionData {
     }
     
     public void eliminarInscripcionMateriaAlumno(int idAlumno, int idMateria){
-        String sql = "DELETE FROM `inscripcion` WHERE idAlumno = ? AND idMateria = ?";
+        String sql = "DELETE FROM `inscripcion` WHERE id_alumno = ? AND id_materia = ?";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql);
