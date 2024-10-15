@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Joaco
  */
-public class Inscripcion extends javax.swing.JInternalFrame {
+public class VistaInscripcion extends javax.swing.JInternalFrame {
 
     private List<Materia> listaM;
     private List<Alumno> listaAl;
@@ -33,7 +33,7 @@ public class Inscripcion extends javax.swing.JInternalFrame {
     /**
      * Creates new form FormularioInscripcion
      */
-    public Inscripcion() {
+    public VistaInscripcion(Alumno a, Materia m, int par) {
         initComponents();
         alData = new alumnoData();
         listaAl = alData.listarAlumnos();
@@ -59,7 +59,7 @@ public class Inscripcion extends javax.swing.JInternalFrame {
     
     private void cargarAlumnos(){
         for(Alumno item: listaAl){
-            jcbAlumno.addItem(item);
+            jcbAlumno.addItem(title);
         }
     }
     
@@ -115,11 +115,10 @@ public class Inscripcion extends javax.swing.JInternalFrame {
         jbAins = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
 
-        jLabel1.setText("Formulario de Inscripción");
+        jLabel1.setText("FORMULARIO DE INSCRIPCIÓN");
 
         jLabel2.setText("Alumno:");
 
-        jcbAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbAlumnoActionPerformed(evt);
@@ -163,8 +162,18 @@ public class Inscripcion extends javax.swing.JInternalFrame {
         });
 
         jbAins.setText("Anular Inscripción");
+        jbAins.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAinsActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,9 +184,9 @@ public class Inscripcion extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(119, 119, 119)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -227,7 +236,9 @@ public class Inscripcion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnoActionPerformed
-        // TODO add your handling code here:
+        removerFilaTabla();
+        jrbMatInscripta.setSelected(false);
+        jrbMatNo.setSelected(false);
     }//GEN-LAST:event_jcbAlumnoActionPerformed
 
     private void jrbMatInscriptaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMatInscriptaActionPerformed
@@ -256,7 +267,7 @@ public class Inscripcion extends javax.swing.JInternalFrame {
             int anio = (Integer)modelo.getValueAt(fSelec, 2);
             Materia m = new Materia(idMateria,nombre, anio,true);
             
-            Inscripcion ins = new Inscripcion(a,m,0);
+            VistaInscripcion ins = new VistaInscripcion(a,m,0);
             insData.guardarInscripcion(ins);
             removerFilaTabla();
             if(jrbMatInscripta.isSelected()){
@@ -268,6 +279,28 @@ public class Inscripcion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Seleccione una fila");
         }
     }//GEN-LAST:event_jbInsActionPerformed
+
+    private void jbAinsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAinsActionPerformed
+         int fSelec = jTablaMat.getSelectedRow();
+        if(fSelec != -1){
+            Alumno a = (Alumno) jcbAlumno.getSelectedItem();
+            int idMateria = (Integer) modelo.getValueAt(fSelec, 0);
+            insData.eliminarInscripcionMateriaAlumno(a.getIdAlumno(), idMateria);
+            
+            removerFilaTabla();
+            if(jrbMatInscripta.isSelected()){
+                cargaInscriptas();
+            }else if(jrbMatNo.isSelected()){
+                cargaNoInscriptas();
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Seleccione un fila");
+        }
+    }//GEN-LAST:event_jbAinsActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
