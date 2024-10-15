@@ -44,8 +44,8 @@ public class alumnoData {
     
     public void actualizarAlumno(Alumno alumno){
         try {
-            String sql = "UPDATE alumno SET dni= ?,apellido= ?,nombre= ?,fechaNac= ? "
-                    + "WHERE idAlumno = ?";
+            String sql = "UPDATE alumno SET dni= ?,apellido= ?,nombre= ?,fechaNacimiento= ? "
+                    + "WHERE id_alumno = ?";
             
             PreparedStatement ps = con.prepareStatement(sql);
             
@@ -68,7 +68,7 @@ public class alumnoData {
     public Alumno buscarAlumno(int id){
         Alumno alumno = null;
         try{
-            String sql = "SELECT `dni`, `apellido`, `nombre`, `fechaNac` FROM `alumno` WHERE idAlumno = ? AND estado = 1";
+            String sql = "SELECT `dni`, `apellido`, `nombre`, `fechaNacimiento` FROM `alumno` WHERE id_alumno = ? AND estado = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setInt(1,id);
@@ -81,7 +81,7 @@ public class alumnoData {
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
-                alumno.setFecha(rs.getDate("fechaNac").toLocalDate());
+                alumno.setFecha(rs.getDate("fechaNacimietno").toLocalDate());
                 alumno.setEstado(true);
                 
             }else{
@@ -123,7 +123,7 @@ public class alumnoData {
     
     public void eliminarAlumno(int id){
         try{
-            String sql = "UPDATE alumno SET estado = 0 WHERE idAlumno = ? ";
+            String sql = "UPDATE alumno SET estado = 0 WHERE id_alumno = ? ";
             PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setInt(1, id);
