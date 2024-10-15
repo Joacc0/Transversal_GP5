@@ -34,7 +34,7 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
     /**
      * Creates new form FormularioInscripcion
      */
-    public VistaInscripcion(Alumno a, Materia m, int par) {
+    public VistaInscripcion() {
         initComponents();
         alData = new alumnoData();
         listaAl = alData.listarAlumnos();
