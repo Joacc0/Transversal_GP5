@@ -18,7 +18,7 @@ public class materiaData {
     }
     
     public void guardarMateria(Materia materia){
-        String sql = " INSERT INTO materia (nombre, año, estado) VALUES (?,?,?) ";
+        String sql = " INSERT INTO materia (nombre, year, estado) VALUES (?,?,?) ";
         
         try{
            PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
@@ -43,7 +43,7 @@ public class materiaData {
         Materia materia = null;
         
         try{
-            String sql = " SELECT nombre, año, estado FROM materia WHERE idMateria = ? AND estado = 1 ";
+            String sql = " SELECT nombre, year, estado FROM materia WHERE id_materia = ? AND estado = 1 ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -51,7 +51,7 @@ public class materiaData {
                 materia = new Materia();
                 materia.setIdMateria(id);
                 materia.setNombre(rs.getString("nombre"));
-                materia.setAnio(rs.getInt("año"));
+                materia.setAnio(rs.getInt("year"));
                 materia.setEstado(true);
                 
             }else{
@@ -66,7 +66,7 @@ public class materiaData {
     
     public void actualizarMateria(Materia materia){
         try{
-            String sql = " UPDATE materia SET nombre= ?, año= ? WHERE idMateria = ? ";
+            String sql = " UPDATE materia SET nombre= ?, year= ? WHERE id_materia = ? ";
             PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setString(1,materia.getNombre());
@@ -85,7 +85,7 @@ public class materiaData {
     
     public void eliminarMateria(int id){
         try{
-            String sql = " UPDATE materia SET estado = 0 WHERE idMateria = ? ";
+            String sql = " UPDATE materia SET estado = 0 WHERE id_materia = ? ";
             PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setInt(1, id);
@@ -110,9 +110,9 @@ public class materiaData {
             
              while(rs.next()){
                 Materia materia = new Materia();
-                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setIdMateria(rs.getInt("id_materia"));
                 materia.setNombre(rs.getString("nombre"));
-                materia.setAnio(rs.getInt("año"));
+                materia.setAnio(rs.getInt("year"));
                 materia.setEstado(rs.getBoolean("estado"));
                 materias.add(materia);
             }
