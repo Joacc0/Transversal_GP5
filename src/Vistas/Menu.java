@@ -85,7 +85,7 @@ public class Menu extends javax.swing.JFrame {
     private void jmiFAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiFAlumnoActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        VistaAlumno fAlum = new VistaAlumno();
+        FormularioAlumno fAlum = new FormularioAlumno();
         fAlum.setVisible(true);
         escritorio.add(fAlum);
     }//GEN-LAST:event_jmiFAlumnoActionPerformed
@@ -93,7 +93,7 @@ public class Menu extends javax.swing.JFrame {
     private void jmiFMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiFMateriaActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        FormularioMateria fMat = new FormularioMateria();
+        FormularioMateria1 fMat = new FormularioMateria1();
         fMat.setVisible(true);
         escritorio.add(fMat);
     }//GEN-LAST:event_jmiFMateriaActionPerformed

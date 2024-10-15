@@ -4,12 +4,24 @@
  */
 package Vistas;
 
+import Entidades.Alumno;
+import Persistencia.alumnoData;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
  */
 public class FormularioAlumno extends javax.swing.JInternalFrame {
 
+    alumnoData alumData = new alumnoData();
+    Alumno alumnoActual = null;
+    
     /**
      * Creates new form FormularioAlumno
      */
@@ -27,15 +39,15 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jlAlumno = new javax.swing.JLabel();
         JlDni = new javax.swing.JLabel();
         jlApellido = new javax.swing.JLabel();
         jlNombre = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jlEstado = new javax.swing.JLabel();
+        jtDni = new javax.swing.JTextField();
+        jtApellido = new javax.swing.JTextField();
+        jtNombre = new javax.swing.JTextField();
+        jcbEstado = new javax.swing.JCheckBox();
         jlFechaNacimiento = new javax.swing.JLabel();
         jbBuscar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
@@ -43,7 +55,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jcFechaNacimiento = new com.toedter.calendar.JDateChooser();
 
-        jLabel1.setText("ALUMNO");
+        jlAlumno.setText("ALUMNO");
 
         JlDni.setText("DOCUMENTO:");
 
@@ -51,19 +63,57 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
 
         jlNombre.setText("NOMBRE:");
 
-        jLabel5.setText("ESTADO: ");
+        jlEstado.setText("ESTADO: ");
 
-        jCheckBox1.setText("estado");
+        jtDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtDniKeyReleased(evt);
+            }
+        });
+
+        jtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtApellidoKeyReleased(evt);
+            }
+        });
+
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtNombreKeyReleased(evt);
+            }
+        });
+
+        jcbEstado.setText("estado");
 
         jlFechaNacimiento.setText("FECHA DE NACIMIENTO:");
 
         jbBuscar.setText("BUSCAR");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("GUARDAR");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setText("ELIMINAR");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("SALIR");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jcFechaNacimiento.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -81,16 +131,16 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                     .addComponent(JlDni)
                     .addComponent(jlApellido)
                     .addComponent(jlFechaNacimiento)
-                    .addComponent(jLabel5)
+                    .addComponent(jlEstado)
                     .addComponent(jlNombre))
                 .addGap(56, 56, 56)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3))
+                            .addComponent(jcbEstado)
+                            .addComponent(jtDni, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                            .addComponent(jtApellido)
+                            .addComponent(jtNombre))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbBuscar)
                         .addGap(17, 17, 17))
@@ -101,7 +151,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(215, 215, 215)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jlAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jbGuardar)
@@ -115,24 +165,24 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jlAlumno)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JlDni)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBuscar))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlApellido)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNombre)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jCheckBox1))
+                    .addComponent(jlEstado)
+                    .addComponent(jcbEstado))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jlFechaNacimiento)
@@ -168,23 +218,133 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         jbEliminar.setEnabled(false);
     }//GEN-LAST:event_jcFechaNacimientoPropertyChange
 
+    private void jtDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDniKeyReleased
+        jbEliminar.setEnabled(false);
+    }//GEN-LAST:event_jtDniKeyReleased
+
+    private void jtApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtApellidoKeyReleased
+       jbEliminar.setEnabled(false);
+    }//GEN-LAST:event_jtApellidoKeyReleased
+
+    private void jtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyReleased
+        jbEliminar.setEnabled(false);
+    }//GEN-LAST:event_jtNombreKeyReleased
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        int dni;
+        
+        if (validarEntero(jtDni.getText())) {    
+            
+            dni = Integer.parseInt(jtDni.getText());
+            alumnoActual = alumData.buscarAlumnoPorDni(dni);
+            
+        if (alumnoActual != null) {
+            jtNombre.setText(alumnoActual.getNombre());
+            jtApellido.setText(alumnoActual.getApellido());
+            LocalDate ld = alumnoActual.getFecha();
+            Date date = Date.from(ld.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            jcFechaNacimiento.setDate(date);
+            jcbEstado.setSelected(alumnoActual.isEstado());
+            jbEliminar.setEnabled(true);
+        }
+        }else{
+            JOptionPane.showMessageDialog(this, "Dni invalido");
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        int dni = 0;
+        String apellido = null,nombre = null;
+        boolean estado;
+        Date fecha;
+        
+        if (jtDni.getText().isEmpty() || jtNombre.getText().isEmpty() || jtApellido.getText().isEmpty() || jcFechaNacimiento.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Hay campos sin completar");
+        }else{
+            // Validacion DNI
+            if (validarEntero(jtDni.getText())) {
+                dni = Integer.parseInt(jtDni.getText());
+            }
+            // Validacion Nombre
+            if (validarTexto(jtNombre.getText())) {
+                nombre = jtNombre.getText();
+            }
+            // Validacion Apellido
+            if (validarTexto(jtApellido.getText())) {
+                apellido = jtApellido.getText();
+            }else{
+                jlApellido.setVisible(true);
+            }
+            
+            fecha = jcFechaNacimiento.getDate();
+            LocalDate fechaNac = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            estado = jcbEstado.isSelected();
+            
+            
+                if (alumnoActual == null) {
+                    alumnoActual = new Alumno(dni,apellido,nombre,fechaNac,estado);
+                    alumData.guardarAlumno(alumnoActual);
+                }else{
+                    alumnoActual.setDni(dni);
+                    alumnoActual.setApellido(apellido);
+                    alumnoActual.setNombre(nombre);
+                    alumnoActual.setFecha(fechaNac);
+                    alumnoActual.setEstado(estado);
+                    alumData.actualizarAlumno(alumnoActual);
+                }
+                limpiarCampos();
+            
+        }
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        int dni = Integer.parseInt(jtDni.getText());
+        Alumno alumno = alumData.buscarAlumnoPorDni(dni);
+        alumData.eliminarAlumno(alumno.getIdAlumno());
+        limpiarCampos();
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+    
+    private boolean validarEntero(String nro){
+        Pattern patron=Pattern.compile("^[0-9]+$");
+        Matcher m=patron.matcher(nro);
+        return m.matches();
+    }
+    
+    private boolean validarTexto(String string){
+        Pattern patron = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]+$");
+        Matcher m=patron.matcher(string);
+        return m.matches();
+    }
+
+    public void limpiarCampos(){
+        jtDni.setText("");
+        jtNombre.setText("");
+        jtApellido.setText("");
+        jcbEstado.setSelected(true);
+        jcFechaNacimiento.cleanup();
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JlDni;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbSalir;
     private com.toedter.calendar.JDateChooser jcFechaNacimiento;
+    private javax.swing.JCheckBox jcbEstado;
+    private javax.swing.JLabel jlAlumno;
     private javax.swing.JLabel jlApellido;
+    private javax.swing.JLabel jlEstado;
     private javax.swing.JLabel jlFechaNacimiento;
     private javax.swing.JLabel jlNombre;
+    private javax.swing.JTextField jtApellido;
+    private javax.swing.JTextField jtDni;
+    private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 }
