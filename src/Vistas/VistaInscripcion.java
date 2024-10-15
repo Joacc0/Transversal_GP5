@@ -316,4 +316,6 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jrbMatInscripta;
     private javax.swing.JRadioButton jrbMatNo;
     // End of variables declaration//GEN-END:variables
+
+    
 }

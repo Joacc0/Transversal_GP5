@@ -20,7 +20,7 @@ public class inscripcionData {
         con = Conexion.getConexion();
     }
     
-    public void guardarInscripcion(VistaInscripcion insc){
+    public void guardarInscripcion(Inscripcion insc){
         String sql = "INSERT INTO inscripcion(nota, idAlumno, idMateria) "
                 + "VALUES (?,?,?)";
         
