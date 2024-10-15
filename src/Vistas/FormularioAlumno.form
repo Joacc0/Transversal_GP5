@@ -47,17 +47,17 @@
                       <Component id="JlDni" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jlApellido" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jlFechaNacimiento" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlEstado" min="-2" max="-2" attributes="0"/>
                       <Component id="jlNombre" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField1" alignment="0" pref="149" max="32767" attributes="0"/>
-                              <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextField3" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jcbEstado" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtDni" alignment="0" pref="149" max="32767" attributes="0"/>
+                              <Component id="jtApellido" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtNombre" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
@@ -73,7 +73,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="74" max="-2" attributes="0"/>
+                          <Component id="jlAlumno" min="-2" pref="74" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -92,27 +92,27 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlAlumno" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="JlDni" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtDni" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jlApellido" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtApellido" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jlNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
@@ -131,7 +131,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="jlAlumno">
           <Properties>
             <Property name="text" type="java.lang.String" value="ALUMNO"/>
           </Properties>
@@ -151,18 +151,27 @@
             <Property name="text" type="java.lang.String" value="NOMBRE:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="jlEstado">
           <Properties>
             <Property name="text" type="java.lang.String" value="ESTADO: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="jtDni">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtDniKeyReleased"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="jtApellido">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtApellidoKeyReleased"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
+        <Component class="javax.swing.JTextField" name="jtNombre">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtNombreKeyReleased"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+        <Component class="javax.swing.JCheckBox" name="jcbEstado">
           <Properties>
             <Property name="text" type="java.lang.String" value="estado"/>
           </Properties>
@@ -176,21 +185,33 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="BUSCAR"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbBuscarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbGuardar">
           <Properties>
             <Property name="text" type="java.lang.String" value="GUARDAR"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbGuardarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbEliminar">
           <Properties>
             <Property name="text" type="java.lang.String" value="ELIMINAR"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbEliminarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbSalir">
           <Properties>
             <Property name="text" type="java.lang.String" value="SALIR"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSalirActionPerformed"/>
+          </Events>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jcFechaNacimiento">
           <Events>
