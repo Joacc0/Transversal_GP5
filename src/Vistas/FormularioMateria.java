@@ -12,9 +12,7 @@ public class FormularioMateria extends javax.swing.JFrame {
     private Materia matActual = null;
     
 
-    /**
-     * Creates new form FormularioMateria
-     */
+  
     public FormularioMateria() {
         initComponents();
 
