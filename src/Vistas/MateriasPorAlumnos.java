@@ -1,16 +1,30 @@
 package Vistas;
 
+import Entidades.Alumno;
+import Entidades.Materia;
+import Persistencia.inscripcionData;
+import Persistencia.materiaData;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author User
  */
 public class MateriasPorAlumnos extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AlumnosPorMateria
-     */
+    materiaData matData = new materiaData();
+    inscripcionData inscData = new inscripcionData();
+    private DefaultTableModel model;
+    List<Materia> listaMaterias;
+    
     public MateriasPorAlumnos() {
         initComponents();
+        this.listaMaterias = matData.listarMaterias();
+        this.model = (DefaultTableModel) jtAlumnos.getModel();
+        for (Materia m:listaMaterias) {
+            jcbMaterias.addItem(m.getNombre());  
+        }   
     }
 
     /**
@@ -55,6 +69,11 @@ public class MateriasPorAlumnos extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtAlumnos);
 
         jbSalir.setText("SALIR");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -131,6 +150,16 @@ public class MateriasPorAlumnos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jcbMateriasActionPerformed
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+    
+    private void borrarFilas(){
+         int filas=model.getRowCount()-1;
+         for(int f=filas;f >= 0;f--){
+             model.removeRow(f);
+         }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

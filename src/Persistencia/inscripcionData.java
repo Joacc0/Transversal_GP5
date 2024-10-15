@@ -3,7 +3,6 @@ package Persistencia;
 import Entidades.Alumno;
 import Entidades.Inscripcion;
 import Entidades.Materia;
-import Vistas.VistaInscripcion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

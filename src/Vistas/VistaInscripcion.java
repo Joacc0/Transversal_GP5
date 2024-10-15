@@ -5,6 +5,7 @@
 package Vistas;
 
 import Entidades.Alumno;
+import Entidades.Inscripcion;
 import Entidades.Materia;
 import Persistencia.alumnoData;
 import Persistencia.inscripcionData;
@@ -267,7 +268,7 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
             int anio = (Integer)modelo.getValueAt(fSelec, 2);
             Materia m = new Materia(idMateria,nombre, anio,true);
             
-            VistaInscripcion ins = new VistaInscripcion(a,m,0);
+            Inscripcion ins = new Inscripcion(a,m,0);
             insData.guardarInscripcion(ins);
             removerFilaTabla();
             if(jrbMatInscripta.isSelected()){
