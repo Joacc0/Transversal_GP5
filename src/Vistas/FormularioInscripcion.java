@@ -60,7 +60,8 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
     
     private void cargarAlumnos(){
         for(Alumno item: listaAl){
-            jcbAlumno.addItem(title);
+//            System.out.println(item);
+            jcbAlumno.addItem(item);
         }
     }
     
@@ -120,6 +121,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Alumno:");
 
+        jcbAlumno.setForeground(new java.awt.Color(255, 51, 51));
         jcbAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbAlumnoActionPerformed(evt);
@@ -313,7 +315,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbAins;
     private javax.swing.JButton jbIns;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcbAlumno;
+    private javax.swing.JComboBox<Alumno> jcbAlumno;
     private javax.swing.JRadioButton jrbMatInscripta;
     private javax.swing.JRadioButton jrbMatNo;
     // End of variables declaration//GEN-END:variables

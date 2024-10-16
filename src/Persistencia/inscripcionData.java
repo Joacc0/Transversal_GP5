@@ -131,6 +131,7 @@ public class inscripcionData {
         }catch(SQLException ex){
             System.out.println("Error al acceder a la tabla, Error: " + ex);
         }
+        System.out.println(materias);
         return materias;
     }
     
