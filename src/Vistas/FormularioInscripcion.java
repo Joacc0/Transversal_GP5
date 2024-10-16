@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Joaco
  */
-public class VistaInscripcion extends javax.swing.JInternalFrame {
+public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
     private List<Materia> listaM;
     private List<Alumno> listaAl;
@@ -34,7 +34,7 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
     /**
      * Creates new form FormularioInscripcion
      */
-    public VistaInscripcion() {
+    public FormularioInscripcion() {
         initComponents();
         alData = new alumnoData();
         listaAl = alData.listarAlumnos();
